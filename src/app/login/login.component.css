@@ -1,0 +1,41 @@
+.wrapper{
+    color: black;
+    height: 70vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white ;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.box {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    background-color: #FF9933;
+}
+
+.btn-primary {
+    background-color: #1FD339;
+    border: #1FD339;
+    width: 260px;
+}
+
+.btn-primary:hover{
+    background-color: #1FD339 !important;
+    border: #1FD339 !important;
+}
+
+input{
+    width: 260px
+}
+
+#submitButton{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
