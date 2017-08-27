@@ -7,12 +7,60 @@
     <div id="nav">
         <div id="nav-list">
             <ul>
-                <li><a routerLink="/admin" routerLinkActive="active">Statistics</a></li>
-                <li><a routerLink="/student" routerLinkActive="active">Student</a></li>
-                <li><a routerLink="/instructor" routerLinkActive="active">Instructor</a></li>
-                <li><a routerLink="/schedules" routerLinkActive="active">Schedules</a></li>
-                <li><a routerLink="/buildings" routerLinkActive="active">Buildings</a></li>
-                <li><a routerLink="/account" routerLinkActive="active">Account</a></li>
+                <li>
+                    <a 
+                        [routerLink]="['/','admin']" 
+                        routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Statistics
+                    </a>
+                </li>
+                
+                <li>
+                    <a
+                        [routerLink]="['student']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Student
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        [routerLink]="['instructor']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Instructor
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        [routerLink]="['schedules']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Schedules
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        [routerLink]="['buildings']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Buildings
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        [routerLink]="['account']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Account
+                    </a>
+                </li>
+
                 <li class="logout">
                     <a><i class="glyphicon glyphicon-off"></i></a>
                 </li>

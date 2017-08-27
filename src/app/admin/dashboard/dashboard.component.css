@@ -8,11 +8,7 @@
 .stats {
     text-align: center;
     color: white;
+    height: 0px;
     flex: 1 1 33.3333%
 }
 
-#profile{
-    flex: 1 1 100%;
-    border: 1px solid red;
-    width: 100%;
-}

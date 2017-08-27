@@ -1,3 +1,4 @@
+import { AccountComponent } from './account/account.component';
 import { FormComponent } from './form/form.component';
 import { StudentComponent } from './student/student.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
         AdminComponent,
         DashboardComponent,
         StudentComponent,
-        FormComponent
+        FormComponent,
+        AccountComponent
     ],
     providers: [
         ResourceService
