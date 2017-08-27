@@ -1,3 +1,4 @@
+import { FormComponent } from './form/form.component';
 import { StudentComponent } from './student/student.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResourceService } from './../resource.service';
@@ -20,8 +21,8 @@ import { CommonModule } from '@angular/common';
     declarations: [
         AdminComponent,
         DashboardComponent,
-        StudentComponent
-
+        StudentComponent,
+        FormComponent
     ],
     providers: [
         ResourceService
