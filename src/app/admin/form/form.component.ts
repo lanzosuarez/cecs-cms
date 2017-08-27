@@ -1,5 +1,5 @@
 import { ResourceService } from './../../resource.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'cecs-form',
@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class FormComponent implements OnInit {
+
+    @Input('formPlaceHolder') formPlaceHolder: string = "";
+    @Input('formTitle') formTitle: string = "";
 
     userType: number;
 
