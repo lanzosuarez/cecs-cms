@@ -1,4 +1,3 @@
-import { ProfileComponent } from './profile/profile.component';
 import { StyleHelperService } from './style-helper.service';
 import { ResourceService } from './resource.service';
 import { Routing } from './app.routing';
@@ -14,8 +13,7 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ProfileComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +21,11 @@ import { AppComponent } from './app.component';
     HttpModule,
     Routing
   ],
-  providers: [LoginService, ResourceService, StyleHelperService],
+  providers: [
+    LoginService, 
+    ResourceService, 
+    StyleHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

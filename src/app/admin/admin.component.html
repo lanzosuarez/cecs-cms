@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div id="banner">
+        <img src="/assets/logo/logo.png" alt="CECS.logo" id="logo">
+        <h2>CECS Student and Instructors Information Management System</h2>
+    </div>
+
+    <div id="nav">
+        <div id="nav-list">
+            <ul>
+                <li><a routerLink="/admin" routerLinkActive="active">Statistics</a></li>
+                <li><a routerLink="/student" routerLinkActive="active">Student</a></li>
+                <li><a routerLink="/instructor" routerLinkActive="active">Instructor</a></li>
+                <li><a routerLink="/schedules" routerLinkActive="active">Schedules</a></li>
+                <li><a routerLink="/buildings" routerLinkActive="active">Buildings</a></li>
+                <li><a routerLink="/account" routerLinkActive="active">Account</a></li>
+                <li class="logout">
+                    <a><i class="glyphicon glyphicon-off"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="outlet">
+        <div id="outlet-sub-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <!-- 
+    <div id="footer">
+        <h6>CECS &copy; All Rights Reserve</h6>
+    </div> -->
+</div>

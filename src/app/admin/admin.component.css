@@ -1,0 +1,120 @@
+.wrapper {
+    font-family: 'Raleway', sans-serif;
+    overflow-y: scroll;
+    background-color: rgba(89, 58, 27, 0.83);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#banner{
+    display: flex;
+    background-color: rgb(62, 62, 62) ;
+    height: 10vh;
+    width: 100%;
+    color: white;
+    /* align-items: center; */
+}
+
+#banner>h2{
+    margin-left: 20px;
+}
+
+
+#logo{
+    height: 100%;
+    /* margin-top: 55px; */
+}
+
+#nav{
+    width: 100%;
+}
+
+#outlet{
+    width: 100%;
+    display: flex;
+}
+
+#outlet-sub-wrapper{
+    flex: 1;
+}
+
+#nav{
+    padding:30px;
+    max-width: 1000px;
+}
+
+#nav>#nav-list>ul{
+    color: white;
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid black; */
+    display: flex;
+    list-style: none;
+}
+
+#nav>#nav-list>ul>li{
+    flex:3;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#nav>#nav-list>ul>li:last-child{
+    border-right: 1px solid black;
+}
+
+#nav>#nav-list>ul>li:first-child{
+    border-left: 1px solid black;
+}
+
+#nav>#nav-list>ul>.logout{
+    flex:1;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+a {
+    cursor: pointer;
+    color:white;
+    font-weight: 100;
+    letter-spacing: 2px;
+    text-decoration: none;
+    background:rgba(0,0,0,0.2);
+    padding:20px 5px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    transition:all 0.5s;
+  }
+
+a:hover {
+    background:rgba(0,0,0,0.3);
+}
+
+.active{
+    background:rgba(0,0,0,0.3);
+}
+
+#outlet{
+    display: flex;
+    max-width: 940px;
+    height: 450px;
+    background:rgba(0,0,0,0.2);
+    border: 1px solid black;
+}
+  
+
+
+
+/* #footer{
+    display: flex;
+    background-color: #398D4B;
+    height: 5vh;
+    width: 100%;
+    align-self: flex-end;
+    justify-content: center;
+} */
+

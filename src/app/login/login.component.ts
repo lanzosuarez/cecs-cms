@@ -1,3 +1,4 @@
+import { ResourceService } from './../resource.service';
 import { StyleHelperService } from './../style-helper.service';
 import {
   Component,
@@ -38,6 +39,7 @@ export class LoginComponent implements AfterViewInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private loginService: LoginService,
+    private rs: ResourceService,
     private s: StyleHelperService
   ) {
     this.initializeLoginForm();
@@ -84,13 +86,13 @@ export class LoginComponent implements AfterViewInit {
   //handle data response here
   onLoginData(r) {
     this.hideSpinner();//hide spinner
-    this.router.navigate(['profile']);//then navigate to dash board
+    this.router.navigate(['admin']);//then navigate to dash board
   }
 
   showErrorMessage(err) {
     //show error message
     this.s.hideElement(this.errorMessage, false);
-    
+
     //check code for proper error message
     this.checkCodes(err.code);
 

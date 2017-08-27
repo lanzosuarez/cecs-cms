@@ -9,6 +9,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class ResourceService {
 
+    userType: number;
+
     onData(data: Response) {
         return data.json();
     }
@@ -17,32 +19,33 @@ export class ResourceService {
         return Observable.throw(err.json());
     }
 
-    getUser() {
-        return JSON.parse(window.localStorage.getItem('user'));
+    getItem(item) {
+        return JSON.parse(window.localStorage.getItem(item));
     }
 
-    setToken(token: string): void {
-        window.localStorage.setItem('token', token);
+    setItem(name, value) {
+        window.localStorage.setItem(name, this.stringify(value));
     }
 
-    setUser(user) {
-        window.localStorage.setItem('user', this.stringify(user));
+    setUserType(type: number){
+        this.userType = type;
     }
+
+    getUserType(){
+        return this.userType;
+    }
+
 
     stringify(obj) {
         return JSON.stringify(obj);
     }
 
-    getToken(): string {
-        return window.localStorage.getItem('token');
-    }
-
     getPostHeader() {
         return new Headers({
             'Content-Type': 'application/json',
-            'x-access-token': this.getToken()
+            'x-access-token': this.getItem('token')
         });
     }
-    
+
 
 }
