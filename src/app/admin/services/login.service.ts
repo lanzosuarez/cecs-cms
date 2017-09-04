@@ -34,7 +34,7 @@ export class LoginService {
             'x-access-token': this.rs.getItem('token')
         });
 
-        return this.http.get(`${url}/cecs/decode_user`, { headers }).
+        return this.http.get(`${url}/cecs/decode_admin`, { headers }).
             map(this.rs.onData).catch(this.rs.onError);
     }
 
