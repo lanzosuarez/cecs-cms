@@ -1,7 +1,8 @@
-import { StyleHelperService } from './style-helper.service';
-import { ResourceService } from './resource.service';
+import { LoginGuardService } from './admin/services/login.guard.service';
+import { StyleHelperService } from './admin/services/style-helper.service';
+import { ResourceService } from './admin/services/resource.service';
+import { LoginService } from './admin/services/login.service';
 import { Routing } from './app.routing';
-import { LoginService } from './login/login.service';
 import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -22,9 +23,10 @@ import { AppComponent } from './app.component';
     Routing
   ],
   providers: [
-    LoginService, 
-    ResourceService, 
-    StyleHelperService
+    LoginService,
+    ResourceService,
+    StyleHelperService,
+    LoginGuardService
   ],
   bootstrap: [AppComponent]
 })

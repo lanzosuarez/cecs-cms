@@ -1,8 +1,9 @@
+import { AdminGuardService } from './services/admin.guard.service';
+import { ResourceService } from './services/resource.service';
 import { AccountComponent } from './account/account.component';
 import { FormComponent } from './form/form.component';
 import { StudentComponent } from './student/student.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ResourceService } from './../resource.service';
 import { AdminRouting } from './admin.routing';
 import { AdminComponent } from './admin.component';
 import { HttpModule } from '@angular/http';
@@ -27,7 +28,8 @@ import { CommonModule } from '@angular/common';
         AccountComponent
     ],
     providers: [
-        ResourceService
+        ResourceService,
+        AdminGuardService
     ],
 })
 export class AdminModule { }

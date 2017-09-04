@@ -3,10 +3,54 @@
         <div id="dp">
         </div>
         <div id="info">
+            <i (click)="openEdit()" id="edit" class="fa fa-pencil-square-o" aria-hidden="true"></i>
             <h3>Admin</h3>
-            <p>Name: Julius Abad Santos</p>
-            <p>Username: positiveBadz</p>
-            <p>Email: positivebadz@gmail.com</p>
+            <p>Name: {{user?.name}}</p>
+            <p>Username: {{user?.username}}</p>
+            <p>Email: {{user?.email}}</p>
         </div>
+    </div>
+</div>
+
+<div id="backdrop" (click)="hideEdit()" #backdrop>
+    <div id="dialog" (click)="clickDialog($event)" #dialog>
+        <form [formGroup]="adminForm" #formAdmin id="formAdmin">
+            <label for="name">Name</label>
+                <span>
+                    <i  
+                        (click)="clickEditLock()"
+                        #editLock
+                        style="
+                            float:right;
+                            cursor:pointer;
+                            color: #738F9B;
+                        "
+                        class="fa fa-lock" 
+                        aria-hidden="true"></i>
+                </span>
+            <input
+                class="form-control" 
+                type="text"
+                placeholder="Name"
+                formControlName="name">
+            <label for="username">Username</label>
+            <input
+                class="form-control"
+                type="text"
+                placeholder="Username"
+                formControlName="username">
+            <label for="email">Email</label>
+            <input
+                class="form-control" 
+                type="text"
+                placeholder="Email"
+                formControlName="email">
+            
+            <button
+                [disabled]="!adminForm.valid"
+                type="submit"
+                class="btn btn-primary"
+            >Edit</button>
+        </form>
     </div>
 </div>

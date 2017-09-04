@@ -18,7 +18,7 @@
                 
                 <li>
                     <a
-                        [routerLink]="['student']" 
+                        [routerLink]="['students']" 
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
                         Student
@@ -27,7 +27,7 @@
 
                 <li>
                     <a
-                        [routerLink]="['instructor']" 
+                        [routerLink]="['/','instructor']" 
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
                         Instructor
@@ -36,10 +36,19 @@
 
                 <li>
                     <a
-                        [routerLink]="['schedules']" 
+                        [routerLink]="['courses']" 
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
-                        Schedules
+                        Courses
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        [routerLink]="['courses']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Colleges
                     </a>
                 </li>
 
@@ -54,6 +63,17 @@
 
                 <li>
                     <a
+                        [routerLink]="['admin-list']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        Admins
+                    </a>
+                </li>
+
+                
+
+                <li>
+                    <a
                         [routerLink]="['account']" 
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
@@ -61,7 +81,7 @@
                     </a>
                 </li>
 
-                <li class="logout">
+                <li (click)="logout()" class="logout">
                     <a><i class="glyphicon glyphicon-off"></i></a>
                 </li>
             </ul>

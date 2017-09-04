@@ -1,3 +1,4 @@
+import { ResourceService } from './services/resource.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AdminComponent implements OnInit {
-    constructor() { }
+    
+    constructor(
+        private rs: ResourceService,
+    ) { }
 
     ngOnInit() { }
+
+    logout(){
+        this.rs.removeItem('token');
+        window.location.pathname = '/';
+    }
 }

@@ -1,3 +1,150 @@
 <div id="wrapper">
+
+    <div id="student-table">
+        <h2 id="table-title">Students</h2>
+        <label style="margin-right: 5px;">Search</label>
+        <i 
+            (click)="hideSearchForm()"
+            style="cursor: pointer"
+            class="fa fa-chevron-down" 
+            aria-hidden="true"></i>
+        <div id="input-searches" #inputSearches>
+            <input 
+                placeholder="SR Code"
+                id="search-box"
+                class="form-control"
+                type="text">
+            <input 
+                placeholder="Year"
+                id="search-box"
+                class="form-control"
+                type="text">
+            <input 
+                placeholder="Section"
+                id="search-box"
+                class="form-control"
+                type="text">
+        </div>
+       
+            <div
+                class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SR Code</th>
+                            <th>Section</th>
+                            <th>Year</th>
+                            <th>Email</th>
+                            <th>Firstname</th>
+                            <th>Middlename</th>
+                            <th>Lastname</th>
+                            <th>Gender</th>
+                            <th>Scheds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                        *ngFor="let student of students; let i=index">
+                            <td>{{student.sr_code}}</td>
+                            <td>{{student.section}}</td>
+                            <td>{{student.year}}</td>
+                            <td>{{student.email}}</td>
+                            <td>{{student.firstname}}</td>
+                            <td>{{student.middlename}}</td>
+                            <td>{{student.lastname}}</td>
+                            <td>{{student.gender}}</td>
+                            <td>
+                                <i 
+                                    (click)="getStudentScheds(student._id)"
+                                    style="color:#738F9B;"
+                                    class="fa fa-book" 
+                                    aria-hidden="true"></i>
+                                <i 
+                                    (click)="openEdit(student)"
+                                    style="color: #B7C68B;"
+                                    class="fa fa-eye" aria-hidden="true"></i>
+                                <i 
     
+                                    (click)="deleteStudent(student._id, i)"
+                                    style="color: #cc483d;"
+                                    class="fa fa-close" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
 </div>
+
+
+<div id="backdrop" (click)="hideEdit()" #backdrop>
+        <div id="dialog" (click)="clickDialog($event)" #dialog>
+            <form [formGroup]="studentForm" #formStudent id="formAdmin">
+                <label for="name">SR Code</label>
+                    <span>
+                        <i  
+                            (click)="clickEditLock()"
+                            #editLock
+                            style="
+                                float:right;
+                                cursor:pointer;
+                                color: #738F9B;
+                            "
+                            class="fa fa-lock" 
+                            aria-hidden="true"></i>
+                    </span>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="SR Code"
+                    formControlName="sr_code">
+                <label for="username">Year</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Year"
+                    formControlName="year">
+                <label for="email">Section</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Section"
+                    formControlName="section">
+                <label for="email">Firstname</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Firstname"
+                    formControlName="firstname">
+                <label for="email">Middle Name</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Middle Name"
+                    formControlName="middlename">
+                <label for="email">Lastname</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Lastname"
+                    formControlName="lastname">
+                <label for="email">Gender</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Gender"
+                    formControlName="gender">
+                <label for="email">Email</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Email"
+                    formControlName="email">
+                <button
+                    [disabled]="!studentForm.valid"
+                    type="submit"
+                    class="btn btn-primary"
+                >Edit</button>
+            </form>
+        </div>
+    </div>

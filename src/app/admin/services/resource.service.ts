@@ -1,5 +1,3 @@
-import { Admin } from './models/admin';
-import { url } from './global';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
@@ -27,14 +25,18 @@ export class ResourceService {
         window.localStorage.setItem(name, this.stringify(value));
     }
 
-    setUserType(type: number){
+    setUserType(type: number) {
         this.userType = type;
     }
 
-    getUserType(){
+    getUserType() {
         return this.userType;
     }
 
+
+    removeItem(item) {
+        window.localStorage.removeItem(item);
+    }
 
     stringify(obj) {
         return JSON.stringify(obj);

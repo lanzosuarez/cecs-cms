@@ -1,5 +1,6 @@
-import { ResourceService } from './../resource.service';
-import { StyleHelperService } from './../style-helper.service';
+import { StyleHelperService } from './../admin/services/style-helper.service';
+import { ResourceService } from './../admin/services/resource.service';
+import { LoginService } from './../admin/services/login.service';
 import {
   Component,
   ElementRef,
@@ -11,20 +12,18 @@ import {
   FormControl,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
+  NgForm
 } from '@angular/forms';
 
-import { LoginService } from './login.service';
 import { Admin } from './../models/admin';
 import { CODES } from './../models/vars';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  styleUrls: ['./login.component.css']
 })
 
 
@@ -74,18 +73,17 @@ export class LoginComponent implements AfterViewInit {
     this.showSpinner();
 
     //then login
-    // this.loginService.onLogin(cred)
-    //   .subscribe(
-    //   r => this.onLoginData(r),
-    //   err => this.showErrorMessage(err)
-    //   );
-    this.onLoginData("");
-
+    this.loginService.onLogin(cred)
+      .subscribe(
+      r => this.onLoginData(r),
+      err => this.showErrorMessage(err)
+      );
   }
 
   //handle data response here
   onLoginData(r) {
     this.hideSpinner();//hide spinner
+    this.rs.setItem('token', r.data.token);
     this.router.navigate(['admin']);//then navigate to dash board
   }
 

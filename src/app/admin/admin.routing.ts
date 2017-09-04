@@ -1,3 +1,5 @@
+import { StudentComponent } from './student/student.component';
+import { AdminGuardService } from './services/admin.guard.service';
 import { AccountComponent } from './account/account.component';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -7,6 +9,7 @@ const ADMIN_ROUTES: Routes = [
     {
         path: '',
         component: AdminComponent,
+        canActivate: [AdminGuardService],
         children: [
             {
                 path: '',
@@ -15,6 +18,10 @@ const ADMIN_ROUTES: Routes = [
             {
                 path: 'account',
                 component: AccountComponent
+            },
+            {
+                path: 'students',
+                component: StudentComponent
             }
         ]
     },
