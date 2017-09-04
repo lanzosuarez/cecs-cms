@@ -49,9 +49,9 @@ export class AccountComponent implements OnInit {
 
     setUser() {
         this.user = {
-            name: "Julius Abad Santos",
-            email: "positivebadz@gmail.com",
-            username: "positiveBadz"
+            name: "Juan Tamd Santos",
+            email: "positiveJuan@gmail.com",
+            username: "positiveJuan"
         };
     }
 
