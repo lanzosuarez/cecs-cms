@@ -13,7 +13,6 @@ import {
     FormGroup
 } from '@angular/forms';
 
-import * as jQuery from 'jquery';
 
 @Component({
     selector: 'cecs-account',
