@@ -1,150 +1,214 @@
 <div id="wrapper">
-
     <div id="student-table">
+        <button 
+            style="width: 200px"
+            (click)="openAddStudent()" class="btn btn-success"> Add Student </button>
         <h2 id="table-title">Students</h2>
         <label style="margin-right: 5px;">Search</label>
-        <i 
-            (click)="hideSearchForm()"
-            style="cursor: pointer"
-            class="fa fa-chevron-down" 
-            aria-hidden="true"></i>
+        <i (click)="hideSearchForm()" style="cursor: pointer" class="fa fa-chevron-down" aria-hidden="true"></i>
         <div id="input-searches" #inputSearches>
-            <input 
-                placeholder="SR Code"
-                id="search-box"
-                class="form-control"
-                type="text">
-            <input 
-                placeholder="Year"
-                id="search-box"
-                class="form-control"
-                type="text">
-            <input 
-                placeholder="Section"
-                id="search-box"
-                class="form-control"
-                type="text">
+            <input placeholder="SR Code" id="search-box" class="form-control" type="text">
+            <input placeholder="Year" id="search-box" class="form-control" type="text">
+            <input placeholder="Section" id="search-box" class="form-control" type="text">
+            <input placeholder="College" id="search-box" class="form-control" type="text">
+            <input placeholder="Course" id="search-box" class="form-control" type="text">
         </div>
-       
-            <div
-                class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>SR Code</th>
-                            <th>Section</th>
-                            <th>Year</th>
-                            <th>Email</th>
-                            <th>Firstname</th>
-                            <th>Middlename</th>
-                            <th>Lastname</th>
-                            <th>Gender</th>
-                            <th>Scheds</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr 
-                        *ngFor="let student of students; let i=index">
-                            <td>{{student.sr_code}}</td>
-                            <td>{{student.section}}</td>
-                            <td>{{student.year}}</td>
-                            <td>{{student.email}}</td>
-                            <td>{{student.firstname}}</td>
-                            <td>{{student.middlename}}</td>
-                            <td>{{student.lastname}}</td>
-                            <td>{{student.gender}}</td>
-                            <td>
-                                <i 
-                                    (click)="getStudentScheds(student._id)"
-                                    style="color:#738F9B;"
-                                    class="fa fa-book" 
-                                    aria-hidden="true"></i>
-                                <i 
-                                    (click)="openEdit(student)"
-                                    style="color: #B7C68B;"
-                                    class="fa fa-eye" aria-hidden="true"></i>
-                                <i 
-    
-                                    (click)="deleteStudent(student._id, i)"
-                                    style="color: #cc483d;"
-                                    class="fa fa-close" aria-hidden="true"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SR Code</th>
+                        <th>Section</th>
+                        <th>Year</th>
+                        <th>College</th>
+                        <th>Course</th>
+                        <th>Email</th>
+                        <th>Firstname</th>
+                        <th>Middlename</th>
+                        <th>Lastname</th>
+                        <th>Gender</th>
+                        <th>Scheds</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of students; let i=index">
+                        <td>{{student.sr_code}}</td>
+                        <td>{{student.section}}</td>
+                        <td>{{student.year}}</td>
+                        <td>{{student.college}}</td>
+                        <td>{{student.course}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.firstname}}</td>
+                        <td>{{student.middlename}}</td>
+                        <td>{{student.lastname}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>
+                            <i (click)="openEdit(student, i)" style="color: #B7C68B;" class="fa fa-eye" aria-hidden="true"></i>
+                            <i (click)="deleteStudent(student._id, i)" style="color: #cc483d;" class="fa fa-close" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 
+
+
+
 <div id="backdrop" (click)="hideEdit()" #backdrop>
-        <div id="dialog" (click)="clickDialog($event)" #dialog>
+    <div id="dialog" (click)="clickDialog($event)" #dialog>
+        <div *ngIf="addStudentFlag===true">
             <form [formGroup]="studentForm" #formStudent id="formAdmin">
                 <label for="name">SR Code</label>
-                    <span>
-                        <i  
-                            (click)="clickEditLock()"
-                            #editLock
-                            style="
-                                float:right;
-                                cursor:pointer;
-                                color: #738F9B;
-                            "
-                            class="fa fa-lock" 
-                            aria-hidden="true"></i>
-                    </span>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="SR Code"
-                    formControlName="sr_code">
+                <span>
+                                <i  
+                                    (click)="clickEditLock()"
+                                    #editLock
+                                    style="
+                                        float:right;
+                                        cursor:pointer;
+                                        color: #738F9B;
+                                    "
+                                    class="fa fa-lock" 
+                                    aria-hidden="true"></i>
+                            </span>
+                <input class="form-control" type="text" placeholder="SR Code" formControlName="sr_code">
                 <label for="username">Year</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    placeholder="Year"
-                    formControlName="year">
+                <input class="form-control" type="text" placeholder="Year" formControlName="year">
                 <label for="email">Section</label>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="Section"
-                    formControlName="section">
+                <input class="form-control" type="text" placeholder="Section" formControlName="section">
+                <label for="username">College</label>
+                <input class="form-control" type="text" placeholder="College" formControlName="college">
+                <label for="email">Course</label>
+                <input class="form-control" type="text" placeholder="Course" formControlName="course">
                 <label for="email">Firstname</label>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="Firstname"
-                    formControlName="firstname">
+                <input class="form-control" type="text" placeholder="Firstname" formControlName="firstname">
                 <label for="email">Middle Name</label>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="Middle Name"
-                    formControlName="middlename">
+                <input class="form-control" type="text" placeholder="Middle Name" formControlName="middlename">
                 <label for="email">Lastname</label>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="Lastname"
-                    formControlName="lastname">
+                <input class="form-control" type="text" placeholder="Lastname" formControlName="lastname">
                 <label for="email">Gender</label>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="Gender"
-                    formControlName="gender">
+                <input class="form-control" type="text" placeholder="Gender" formControlName="gender">
                 <label for="email">Email</label>
-                <input
-                    class="form-control" 
-                    type="text"
-                    placeholder="Email"
-                    formControlName="email">
-                <button
-                    [disabled]="!studentForm.valid"
-                    type="submit"
-                    class="btn btn-primary"
-                >Edit</button>
+                <input class="form-control" type="text" placeholder="Email" formControlName="email">
+                <button 
+                    (click)="addStudent()"
+                    [disabled]="!studentForm.valid" 
+                    type="submit" 
+                    class="btn btn-success">Add Student</button>
             </form>
         </div>
+
+
+
+        <div *ngIf="addStudentFlag===false" id="student-info">
+            <h4>Student Informations</h4>
+            <form [formGroup]="studentForm" #formStudent id="formAdmin">
+                <label for="name">SR Code</label>
+                <span>
+                            <i  
+                                (click)="clickEditLock()"
+                                #editLock
+                                style="
+                                    float:right;
+                                    cursor:pointer;
+                                    color: #738F9B;
+                                "
+                                class="fa fa-lock" 
+                                aria-hidden="true"></i>
+                        </span>
+                <input class="form-control" type="text" placeholder="SR Code" formControlName="sr_code">
+                <label for="username">Year</label>
+                <input class="form-control" type="text" placeholder="Year" formControlName="year">
+                <label for="email">Section</label>
+                <input class="form-control" type="text" placeholder="Section" formControlName="section">
+                <label for="username">College</label>
+                <input class="form-control" type="text" placeholder="College" formControlName="college">
+                <label for="email">Course</label>
+                <input class="form-control" type="text" placeholder="Course" formControlName="course">
+                <label for="email">Firstname</label>
+                <input class="form-control" type="text" placeholder="Firstname" formControlName="firstname">
+                <label for="email">Middle Name</label>
+                <input class="form-control" type="text" placeholder="Middle Name" formControlName="middlename">
+                <label for="email">Lastname</label>
+                <input class="form-control" type="text" placeholder="Lastname" formControlName="lastname">
+                <label for="email">Gender</label>
+                <input class="form-control" type="text" placeholder="Gender" formControlName="gender">
+                <label for="email">Email</label>
+                <input class="form-control" type="text" placeholder="Email" formControlName="email">
+                <button 
+                    (click)="editStudent()"
+                    [disabled]="!studentForm.valid" 
+                    type="submit"
+                    class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+        <div *ngIf="addStudentFlag===false" id="schedules">
+            <div id="schedules-table">
+                <h4>Schedules</h4>
+                <div *ngIf="selectedStudent" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Instructor</th>
+                                <th>Building</th>
+                                <th>Day</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="selectSchedule(i)" *ngFor="let schedule of selectedStudent.schedules; let i=index">
+                                <th>{{schedule.subject}}</th>
+                                <th>{{schedule.instructor}}</th>
+                                <th>{{schedule.building}}</th>
+                                <th>{{schedule.day}}</th>
+                                <th>{{schedule.start}}</th>
+                                <th>{{schedule.end}}</th>
+                                <th>
+                                    <i 
+                                        (click)="deleteStudentSchedule($event, schedule._id, i)" 
+                                        style="color: #cc483d;" class="fa fa-close" aria-hidden="true"></i>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="addStudentFlag===false" id="schedules-forms">
+                <form [formGroup]="addScheduleForm">
+                    <label for="username">Subject</label>
+                    <input class="form-control" type="text" placeholder="Subject" formControlName="subject">
+                    <label for="username">Instructor</label>
+                    <input class="form-control" type="text" placeholder="Instructor" formControlName="instructor">
+                    <label for="username">Building</label>
+                    <input class="form-control" type="text" placeholder="Instructor" formControlName="building">
+                    <label for="username">Day</label>
+                    <input class="form-control" type="text" placeholder="Day" formControlName="day">
+                    <label for="email">Start</label>
+                    <input class="form-control" type="text" placeholder="Start" formControlName="start">
+                    <label for="email">End</label>
+                    <input class="form-control" type="text" placeholder="End" formControlName="end">
+                </form>
+                <button
+                    (click)="addStudentSchedule()"
+                    [disabled]="!addScheduleForm.valid" 
+                    *ngIf="selectedSchedule===undefined" type="submit" class="btn btn-success">Add Schedule</button>
+
+                <button 
+                    [disabled]="!addScheduleForm.valid" 
+                    (click)="updateStudentSchedule()"
+                    *ngIf="selectedSchedule" type="submit" class="btn btn-info">Edit Schedule</button>
+                <button 
+                    *ngIf="selectedSchedule" 
+                    (click)="deselectSchedule()" 
+                    class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
     </div>
+</div>

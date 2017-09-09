@@ -36,24 +36,6 @@
 
                 <li>
                     <a
-                        [routerLink]="['courses']" 
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        Courses
-                    </a>
-                </li>
-
-                <li>
-                    <a
-                        [routerLink]="['courses']" 
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        Colleges
-                    </a>
-                </li>
-
-                <li>
-                    <a
                         [routerLink]="['buildings']" 
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
@@ -93,8 +75,12 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <!-- 
+    
     <div id="footer">
-        <h6>CECS &copy; All Rights Reserve</h6>
-    </div> -->
+        <h5>CECS &copy; All Rights Reserve</h5>
+    </div>
+</div>
+
+<div #loader>
+    <cecs-loader></cecs-loader>
 </div>

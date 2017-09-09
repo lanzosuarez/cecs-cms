@@ -3,7 +3,7 @@
     display: flex;
     height: 100vh;
     align-items: center;
-    background-color: rgba(89, 58, 27, 0.83);;
+    background-color: whitesmoke;
 }
 
 .wrapper{
@@ -18,7 +18,7 @@
     background-color: white;
     border-radius: 5px;
     align-content: flex-start;  
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .btn-primary {

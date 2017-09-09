@@ -1,7 +1,7 @@
 .wrapper {
     font-family: 'Raleway', sans-serif;
     overflow-y: scroll;
-    background-color: rgba(89, 58, 27, 0.83);
+    background-color: white;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -12,10 +12,10 @@
 
 #banner{
     display: flex;
-    background-color: rgb(62, 62, 62) ;
+    background-color:red ;
     height: 10vh;
     width: 100%;
-    color: white;
+    color: black;
     /* align-items: center; */
 }
 
@@ -78,11 +78,11 @@
 
 a {
     cursor: pointer;
-    color:white;
-    font-weight: 100;
+    color:black;
+    font-weight: normal;
     letter-spacing: 2px;
     text-decoration: none;
-    background:rgba(0,0,0,0.2);
+    background:white;
     padding:20px 5px;
     display: inline-block;
     width: 100%;
@@ -102,8 +102,8 @@ a:hover {
     display: flex;
     max-width: 940px;
     height: 450px;
-    background:rgba(0,0,0,0.2);
-    border: 1px solid black;
+    background: white;
+    /* border: 1px solid black; */
 }
   
 

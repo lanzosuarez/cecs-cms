@@ -1,5 +1,12 @@
+import { LoadingService } from './loader/loading.service';
 import { ResourceService } from './services/resource.service';
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ViewChild,
+    ElementRef,
+    AfterViewInit
+} from '@angular/core';
 
 @Component({
     selector: 'cecs-admin',
@@ -7,15 +14,32 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./admin.component.css']
 })
 
-export class AdminComponent implements OnInit {
-    
+export class AdminComponent implements AfterViewInit {
+
+    @ViewChild('loader') loader: ElementRef;
+
     constructor(
+        private loading: LoadingService,
         private rs: ResourceService,
-    ) { }
+    ) {
 
-    ngOnInit() { }
+        this.loading.show.
+            subscribe((r: number) => {
+                console.log(r);
+                if (r === 0) {
+                    this.loader.nativeElement.style.display = 'none';
+                } else {
+                    this.loader.nativeElement.style.display = 'block';
+                }
+            });
 
-    logout(){
+    }
+
+    ngAfterViewInit() {
+        this.loading.emitRequestsCount();
+    }
+
+    logout() {
         this.rs.removeItem('token');
         window.location.pathname = '/';
     }

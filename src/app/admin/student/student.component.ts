@@ -1,3 +1,5 @@
+import { LoadingService } from './../loader/loading.service';
+import { DataService } from './../services/data.service';
 import { StyleHelperService } from './../services/style-helper.service';
 import { Schedule } from './../../models/schedule';
 import { Student } from './../../models/student';
@@ -29,153 +31,35 @@ export class StudentComponent implements OnInit {
     @ViewChild('inputSearches') inputSearches: ElementRef;
 
     studentForm: FormGroup;
+    addScheduleForm: FormGroup;
+    selectedStudent: Student;
+    selectedSchedule: Schedule;
 
+    addStudentFlag: boolean = false;
 
-    students: Student[] = [
-        new Student(
-            "dsadsadsadasd32",
-            "ABC",
-            "1",
-            "4",
-            "Juan",
-            "Tama",
-            "Tamad",
-            "F",
-            "juan.tamad@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-        new Student(
-            "dsadsadsadasd32",
-            "ABC",
-            "1",
-            "4",
-            "Juan",
-            "Tama",
-            "Tamad",
-            "F",
-            "juan.tamad@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),   
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        ),
-        new Student(
-            "dsadsadsadasd32",
-            "CDS",
-            "4",
-            "5",
-            "Jose",
-            "Protacio",
-            "Rizal",
-            "M",
-            "jose.rizal@gmail.com",
-            [
-                new Schedule(this.getDay(0), "8:30", "12:30")
-            ]
-        )
-    ];
+    students: Student[] = [];
 
     constructor(
         private style: StyleHelperService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private dataService: DataService,
+        private loading: LoadingService
     ) {
     }
 
     ngOnInit() {
         this.initializeForm();
+        this.initAddScheduleForm();
         this.disableControls(true);
+        this.getStudents();
     }
 
     initializeForm() {
         this.studentForm = this.formBuilder.group({
             sr_code: this.stringRequired(''),
             year: this.stringRequired(''),
+            college: this.stringRequired(''),
+            course: this.stringRequired(''),
             section: this.stringRequired(''),
             firstname: this.stringRequired(''),
             middlename: this.stringRequired(''),
@@ -186,41 +70,244 @@ export class StudentComponent implements OnInit {
 
     }
 
-    getStudentScheds(_id) {
-        console.log(_id)
-        //get scheds
+    initAddScheduleForm() {
+        this.addScheduleForm = this.formBuilder.group({
+            subject: this.stringRequired(''),
+            instructor: this.stringRequired(''),
+            building: this.stringRequired(''),
+            day: this.stringRequired(''),
+            start: this.stringRequired(''),
+            end: this.stringRequired(''),
+        });
     }
 
-    deleteStudent(_id: string, i: number) {
-        console.log(_id)
-        const decision = confirm("Are you sure you want to remove this item?");
+    ///student requests 
 
+    getStudents() {
+        this.loading.addCounter();
+        this.dataService.getStudents()
+            .subscribe(
+            r => {
+                this.loading.minusCounter();
+                console.log(r);
+                this.students = r.data;
+            },
+            err => {
+                this.loading.minusCounter();
+                console.error(err);
+            }
+            );
+    }
+
+
+    addStudent() {
+        this.loading.addCounter();
+        this.dataService.createStudent(this.studentForm.value)
+            .subscribe(
+            r => {
+                this.loading.minusCounter();
+                this.hideEdit();
+                this.initializeForm();
+                this.getStudents();
+            },
+            err => {
+                this.loading.minusCounter();
+                console.error(err);
+                alert("There's an error while fethcing the students information. Please try again");
+            }
+            );
+    }
+
+    fireDeleteStudent(_id, i) {
+        this.loading.addCounter();
+        this.dataService.deleteStudent(_id)
+            .subscribe(
+            r => {
+                this.loading.minusCounter();
+                this.students.splice(i, 1);
+            },
+            err => {
+                this.loading.minusCounter();
+                console.error(err);
+                alert("There's an error while deleting the student. Please try again");
+            }
+            );
+    }
+
+
+    editStudent() {
+        console.log(this.studentForm.value);
+        this.loading.addCounter();
+        this.dataService
+            .updateStudent(this.studentForm.value, this.selectedStudent._id)
+            .subscribe(
+            r => {
+                alert("Information successfully updated");
+                this.loading.minusCounter();
+                this.clickEditLock();
+
+            }, err => {
+                this.loading.minusCounter();
+                console.error(err);
+                alert("There's an error while updating the student. Please try again");
+            }
+            );
+
+    }
+
+
+    deleteStudent(_id: string, i: number) {
+        const decision = confirm("Are you sure you want to remove this item?");
         if (decision) {
-            this.students.splice(i, 1);
+            this.fireDeleteStudent(_id, i)
+        } else {
+            return false;
+        }
+    }
+
+    ///////////////////////
+
+
+    //schedule requests
+
+    addStudentSchedule() {
+        console.log(this.selectedStudent, this.addScheduleForm.value);
+        const
+            { _id } = this.selectedStudent,
+            schedule = this.addScheduleForm.value;
+
+        this.loading.addCounter();
+        this.dataService.addStudentSchedule(_id, schedule)
+            .subscribe(
+            r => {
+                alert("Schedule successfully added");
+                this.loading.minusCounter();
+                this.addScheduleForm.reset();
+                this.selectedStudent.schedules = r.data;
+            },
+            err => {
+                this.loading.minusCounter();
+                alert("An error happened while adding schedule. Please try again")
+                console.error(err);
+            }
+            )
+    }
+
+
+    fireDeleteStudentSchedule(schedule_id, i) {
+        const { _id } = this.selectedStudent;
+
+        this.loading.addCounter();
+        this.dataService.deleteStudentSchedule(_id, schedule_id)
+            .subscribe(
+            r => {
+                this.loading.minusCounter();
+                this.selectedStudent.schedules.splice(i, 1);
+            },
+            err => {
+                this.loading.minusCounter();
+                alert("An error happened while deleting the schedule. Please try again")
+                console.error(err);
+            }
+            );
+    }
+
+    deleteStudentSchedule(e: MouseEvent, _id: string, i: number) {
+        e.stopPropagation();
+        const decision = confirm("Are you sure you want to remove this item?");
+        if (decision) {
+            this.fireDeleteStudentSchedule(_id, i);
         } else {
             return false;
         }
     }
 
 
+    updateStudentSchedule() {
+        const
+            { _id } = this.selectedStudent,
+            { _id: schedule_id } = this.selectedSchedule,
+            schedule = this.addScheduleForm.value;
+
+        console.log(schedule);
+
+        this.loading.addCounter()
+        this.dataService.updateStudentSchedule(
+            _id,
+            schedule_id,
+            schedule
+        ).subscribe(
+            r => {
+                alert("Schedule successfully updated!");
+                this.loading.minusCounter();
+                this.selectedSchedule = Object.assign(this.selectedSchedule, schedule);
+                this.selectedSchedule = undefined;
+                this.initAddScheduleForm();
+            },
+            err => {
+                this.loading.minusCounter();
+                alert("An error happened while updating the schedule. Please try again")
+                console.error(err);
+            }
+            );
+
+    }
+
+    /////
+
 
     stringRequired(val) {
         return [val, Validators.required];
     }
 
-    openEdit(student: Student) {
+    openAddStudent() {
+        this.addStudentFlag = true;
+        this.style.hideElementFlex(this.backdrop, false);
 
+    }
+
+    openEdit(student, i: number) {
+
+        this.selectedStudent = this.students[i];
+        this.setStudentFormValue(student);
+        this.style.hideElementFlex(this.backdrop, false);
+    }
+
+    setStudentFormValue(student) {
         const s = Object.assign({}, student);
         delete s.schedules;
         delete s._id;
-
-        this.studentForm.setValue(s);
-        this.style.hideElementFlex(this.backdrop, false);
+        delete s.__v;
+        this.studentForm.setValue(s)
     }
+
+    setScheduleFormValue(schedule) {
+        const s = Object.assign({}, schedule);
+        delete s._id;
+        this.addScheduleForm.setValue(s)
+    }
+
+    selectSchedule(i: number) {
+        this.selectedSchedule = this.selectedStudent.schedules[i];
+        this.setScheduleFormValue(this.selectedSchedule);
+    }
+
+    deselectSchedule() {
+        this.selectedSchedule = undefined;
+        this.initAddScheduleForm();
+    }
+
 
     hideEdit() {
         this.style.hideElementFlex(this.backdrop, true);
         this.initEditLock();
+        this.initializeForm();
+        this.initAddScheduleForm();
+        this.disableControls(true);
+
+        this.selectedStudent = undefined;
+        this.selectedSchedule = undefined;
+        this.addStudentFlag = false;
     }
 
     clickDialog(e: Event) {
@@ -264,7 +351,6 @@ export class StudentComponent implements OnInit {
     }
 
     hideSearchForm() {
-        console.log("ghello");
         if (this.inputSearches.nativeElement.style.display === 'none') {
             this.style.hideElementFlex(this.inputSearches, false);
         } else {

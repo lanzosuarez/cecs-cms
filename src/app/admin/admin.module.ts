@@ -1,3 +1,6 @@
+import { DataService } from './services/data.service';
+import { LoadingService } from './loader/loading.service';
+import { LoaderComponent } from './loader/loader.component';
 import { AdminGuardService } from './services/admin.guard.service';
 import { ResourceService } from './services/resource.service';
 import { AccountComponent } from './account/account.component';
@@ -25,11 +28,14 @@ import { CommonModule } from '@angular/common';
         DashboardComponent,
         StudentComponent,
         FormComponent,
-        AccountComponent
+        AccountComponent,
+        LoaderComponent
     ],
     providers: [
         ResourceService,
-        AdminGuardService
+        AdminGuardService,
+        LoadingService,
+        DataService
     ],
 })
 export class AdminModule { }

@@ -2,14 +2,16 @@
     display: flex;
     padding: 15px;
     overflow-y: auto;
-    height: 100%
+    height: 100%;
+    border: 1px solid;
+    color:black;
+    max-width: 940px;
 }
 
 #student-table{
-    color: white;
+    color: black;
     flex: 1;
 }
-
 
 
 .table-responsive>table>tbody>tr:hover{
@@ -40,8 +42,8 @@
     transition: 1s;
     background-color: whitesmoke;
     padding: 20px;
-    /* height: 45%; */
     border-radius: 3px;
+    display: flex;
 }
 
 input[type='text']{
@@ -61,4 +63,22 @@ button{
     width: 10%;
     height: 28px;
     margin-left: 10px;
+}
+
+#student-info{
+    margin-right: 30px;
+}
+
+#schedules {
+    display: flex;
+    flex-direction: column;
+}
+
+#schedules-table{
+    overflow: auto;
+    max-height: 300px;
+}
+
+input, select{
+    height: 20px;
 }
