@@ -118,7 +118,20 @@
                 <label for="email">Lastname</label>
                 <input class="form-control" type="text" placeholder="Lastname" formControlName="lastname">
                 <label for="email">Gender</label>
-                <input class="form-control" type="text" placeholder="Gender" formControlName="gender">
+                <select 
+                    class="form-control" 
+                    type="text" 
+                    placeholder="Course" 
+                    formControlName="gender">
+                    <option
+                        selected
+                        value="M"
+                    > Male</option>
+                    <option
+                        selected
+                        value="F"
+                    >Female</option>
+                </select>
                 <label for="email">Email</label>
                 <input class="form-control" type="text" placeholder="Email" formControlName="email">
                 <button 
