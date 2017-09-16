@@ -80,6 +80,7 @@
                     </div>
                     <div class="bulk-add">
                         <button 
+                            *ngIf="mode===2"
                             (click)="searchSchedules()"
                             class="btn btn-success">Search</button>
                     </div>
