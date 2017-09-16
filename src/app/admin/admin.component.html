@@ -12,7 +12,7 @@
                         [routerLink]="['/','admin']" 
                         routerLinkActive="active" 
                         [routerLinkActiveOptions]="{exact:true}">
-                        Statistics
+                        Dashboard
                     </a>
                 </li>
                 
@@ -36,19 +36,10 @@
 
                 <li>
                     <a
-                        [routerLink]="['buildings']" 
+                        [routerLink]="['schedule']" 
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
-                        Buildings
-                    </a>
-                </li>
-
-                <li>
-                    <a
-                        [routerLink]="['admin-list']" 
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        Admins
+                        Schedule
                     </a>
                 </li>
 
@@ -60,6 +51,15 @@
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact:true}">
                         Account
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        [routerLink]="['about']" 
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        About Us
                     </a>
                 </li>
 

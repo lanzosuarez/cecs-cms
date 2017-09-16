@@ -1,3 +1,5 @@
+import { AboutComponent } from './about/about.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 import { DataService } from './services/data.service';
 import { LoadingService } from './loader/loading.service';
 import { LoaderComponent } from './loader/loader.component';
@@ -29,7 +31,9 @@ import { CommonModule } from '@angular/common';
         StudentComponent,
         FormComponent,
         AccountComponent,
-        LoaderComponent
+        LoaderComponent,
+        ScheduleComponent,
+        AboutComponent
     ],
     providers: [
         ResourceService,

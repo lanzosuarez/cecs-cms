@@ -79,11 +79,38 @@
                 <label for="username">Year</label>
                 <input class="form-control" type="text" placeholder="Year" formControlName="year">
                 <label for="email">Section</label>
-                <input class="form-control" type="text" placeholder="Section" formControlName="section">
+                <input class="form-control" type="email" placeholder="Section" formControlName="section">
+           
                 <label for="username">College</label>
-                <input class="form-control" type="text" placeholder="College" formControlName="college">
+                <select 
+                    class="form-control" 
+                    type="text" 
+                    placeholder="College" 
+                    formControlName="college">
+                    <option 
+                        *ngFor="let college of collegesData; let i=index"
+                        [selected]="i===0"
+                        [value]="college">
+                        {{college}}
+                    </option>
+                </select>
+
+
                 <label for="email">Course</label>
-                <input class="form-control" type="text" placeholder="Course" formControlName="course">
+                <select 
+                    class="form-control" 
+                    type="text" 
+                    placeholder="Course" 
+                    formControlName="course">
+                    <option 
+                        *ngFor="let course of coursesData; let i=index"
+                        [selected]="i===0"
+                        [value]="course">
+                        {{course}}
+                    </option>
+                </select>
+                    
+                    
                 <label for="email">Firstname</label>
                 <input class="form-control" type="text" placeholder="Firstname" formControlName="firstname">
                 <label for="email">Middle Name</label>
@@ -124,11 +151,11 @@
                 <label for="username">Year</label>
                 <input class="form-control" type="text" placeholder="Year" formControlName="year">
                 <label for="email">Section</label>
-                <input class="form-control" type="text" placeholder="Section" formControlName="section">
+                <input class="form-control" type="text" placeholder="Section" formControlName="section">    
                 <label for="username">College</label>
                 <input class="form-control" type="text" placeholder="College" formControlName="college">
                 <label for="email">Course</label>
-                <input class="form-control" type="text" placeholder="Course" formControlName="course">
+                <input class="form-control" type="text" placeholder="Course" formControlName="course">   
                 <label for="email">Firstname</label>
                 <input class="form-control" type="text" placeholder="Firstname" formControlName="firstname">
                 <label for="email">Middle Name</label>
@@ -180,7 +207,7 @@
                     </table>
                 </div>
             </div>
-            <div *ngIf="addStudentFlag===false" id="schedules-forms">
+            <!-- <div *ngIf="addStudentFlag===false" id="schedules-forms">
                 <form [formGroup]="addScheduleForm">
                     <label for="username">Subject</label>
                     <input class="form-control" type="text" placeholder="Subject" formControlName="subject">
@@ -189,11 +216,22 @@
                     <label for="username">Building</label>
                     <input class="form-control" type="text" placeholder="Instructor" formControlName="building">
                     <label for="username">Day</label>
-                    <input class="form-control" type="text" placeholder="Day" formControlName="day">
+                    <select 
+                        class="form-control" 
+                        type="text" 
+                        placeholder="Day" 
+                        formControlName="day">
+                        <option 
+                            *ngFor="let day of days; let i=index"
+                            [selected]="i===0"
+                            [value]="day">
+                            {{day}}
+                        </option>
+                    </select>
                     <label for="email">Start</label>
-                    <input class="form-control" type="text" placeholder="Start" formControlName="start">
+                    <input class="form-control" type="time" placeholder="Start" formControlName="start">
                     <label for="email">End</label>
-                    <input class="form-control" type="text" placeholder="End" formControlName="end">
+                    <input class="form-control" type="time" placeholder="End" formControlName="end">
                 </form>
                 <button
                     (click)="addStudentSchedule()"
@@ -208,7 +246,7 @@
                     *ngIf="selectedSchedule" 
                     (click)="deselectSchedule()" 
                     class="btn btn-danger">Cancel</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

@@ -1,0 +1,16 @@
+#wrapper{
+    display: flex;
+    padding: 15px;
+    overflow-y: auto;
+    height: 100%;
+    border: 1px solid;
+    color:black;
+    max-width: 940px;
+    justify-content: space-between;
+}
+
+.sub-wrap{
+    flex: 0 1 400px;
+}
+
+

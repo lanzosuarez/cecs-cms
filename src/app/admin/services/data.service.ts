@@ -72,6 +72,38 @@ export class DataService {
             .catch(err => err.json());
     }
 
+    bulkGetStudentSchedule(year, section, college, course) {
+        const headers = new Headers({
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.get(`${url}/cecs/student_schedule/bulk/${year}/${section}/${college}/${course}`, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+    bulkAddStudentSchedule(year, section, college, course, schedules) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.post(`${url}/cecs/student_schedule/bulk/${year}/${section}/${college}/${course}`, schedules, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+    bulkDelStudentSchedule(year, section, college, course, subject) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.patch(`${url}/cecs/student_schedule/bulk/${year}/${section}/${college}/${course}`, subject, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
     deleteStudentSchedule(student_id, schedule_id) {
         const headers = new Headers({
             'x-access-token': this.rs.getItem('token')
@@ -90,6 +122,17 @@ export class DataService {
         });
 
         return this.http.patch(`${url}/cecs/student_schedule/${student_id}/${schedule_id}`, schedule, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
+    getDisticntClassAndSections() {
+        const headers = new Headers({
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.get(`${url}/cecs/classes`, { headers })
             .map(r => r.json())
             .catch(err => err.json());
     }

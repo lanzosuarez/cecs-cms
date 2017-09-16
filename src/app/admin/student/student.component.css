@@ -79,6 +79,10 @@ button{
     max-height: 300px;
 }
 
-input, select{
+input{
     height: 20px;
+}
+
+select{
+    height: 30px;
 }

@@ -1,0 +1,52 @@
+#wrapper{
+    display: flex;
+    padding: 15px;
+    overflow-y: auto;
+    height: 100%;
+    border: 1px solid;
+    color:black;
+    max-width: 940px;
+    flex-direction: column;
+}
+
+
+#forms {
+    display: flex;
+    flex-direction: column;
+    /* width: 300px; */
+}
+
+#bulk-wrapper{
+    display: flex;
+    /* border: 1px solid; */
+    flex-wrap: wrap;
+}
+
+#bulk-op-wrapper{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+}
+
+#bulk-forms-wrapper{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    margin: 10px;
+    /* padding: 10px; */
+}
+
+
+.bulk-add{
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+
+input, select{
+    height: 30px;
+}
+
+
+

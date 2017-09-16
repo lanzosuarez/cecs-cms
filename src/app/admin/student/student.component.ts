@@ -1,3 +1,4 @@
+import { colleges, courses } from './../school-data';
 import { LoadingService } from './../loader/loading.service';
 import { DataService } from './../services/data.service';
 import { StyleHelperService } from './../services/style-helper.service';
@@ -39,12 +40,18 @@ export class StudentComponent implements OnInit {
 
     students: Student[] = [];
 
+    collegesData = colleges;
+    coursesData = courses;
+    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
     constructor(
         private style: StyleHelperService,
         private formBuilder: FormBuilder,
         private dataService: DataService,
         private loading: LoadingService
     ) {
+
+        console.log(this.collegesData, this.coursesData);
     }
 
     ngOnInit() {
@@ -102,7 +109,10 @@ export class StudentComponent implements OnInit {
 
     addStudent() {
         this.loading.addCounter();
-        this.dataService.createStudent(this.studentForm.value)
+
+        const student = this.studentForm.value;
+
+        this.dataService.createStudent(student)
             .subscribe(
             r => {
                 this.loading.minusCounter();

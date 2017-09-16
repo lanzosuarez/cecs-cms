@@ -1,0 +1,187 @@
+<div id="wrapper">
+    <div id="modes">
+        <!-- <h2>Schedules</h2> -->
+        <button 
+            (click)="setMode(1)"
+            class="btn btn-success">
+            Bulk Add Schedules
+        </button>
+        <button 
+            (click)="setMode(2)"
+            class="btn btn-danger">
+            Bulk Delete Schedules
+        </button>
+    </div>
+    <div 
+        id="forms">
+            <h3 *ngIf="mode===1">Bulk Add</h3>
+            <h3 *ngIf="mode===2">Bulk Delete</h3>
+            <div id="bulk-wrapper">
+                <div id="bulk-op-wrapper">
+                    <div class="bulk-add">
+                            <p>Choose College</p>
+                            <select
+                                #collegeElement
+                                name="college"
+                                class="form-control"
+                            >
+                                <option 
+                                    *ngFor="let college of colleges; let i=index"
+                                    [selected]="i===0"
+                                    [value]="college">
+                                    {{college}}
+                                </option>
+                            </select>
+                        </div>
+                    <div class="bulk-add">
+                            <p>Choose Course</p>
+                            <select
+                                #courseElement
+                                name="course"
+                                class="form-control"
+                            >
+                                <option 
+                                    *ngFor="let course of courses; let i=index"
+                                    [selected]="i===0"
+                                    [value]="course">
+                                    {{course}}
+                                </option>
+                            </select>
+                        </div>
+                    <div class="bulk-add">
+                        <p>Choose Year</p>
+                        <select
+                            #yearElement
+                            name="year"
+                            class="form-control"
+                        >
+                            <option 
+                                *ngFor="let year of years; let i=index"
+                                [selected]="i===0"
+                                [value]="year">
+                                {{year}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="bulk-add">
+                        <p>Choose Section</p>
+                        <select
+                            #sectionElement
+                            name="section"
+                            class="form-control"
+                        >
+                            <option 
+                                *ngFor="let section of sections; let i=index"
+                                [selected]="i===0"
+                                [value]="section">
+                                {{section}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="bulk-add">
+                        <button 
+                            (click)="searchSchedules()"
+                            class="btn btn-success">Search</button>
+                    </div>
+                </div>
+
+                <div id="bulk-forms-wrapper">
+                    <div style="overflow: auto;">
+                        <!-- mode 2 -->
+                        <h3 *ngIf="!selectedClassSchedule && mode===2">
+                            Fetching Schedules...
+                        </h3>
+
+                        <div *ngIf="selectedClassSchedule && mode===2">
+                            <h3 *ngIf="selectedClassSchedule.length === 0">
+                                This class doenst have any schedule yet.
+                                <span><a 
+                                    style="cursor:pointer"
+                                    (click)="setMode(1)">Add?</a> </span>
+                            </h3> 
+                            
+                        </div>
+
+                    
+                        <div *ngIf="selectedClassSchedule && selectedClassSchedule.length > 0 && mode===2" 
+                            class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Instructor</th>
+                                            <th>Building</th>
+                                            <th>Day</th>
+                                            <th>Start</th>
+                                            <th>End</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let schedule of selectedClassSchedule; let i=index">
+                                            <th>{{schedule.subject}}</th>
+                                            <th>{{schedule.instructor}}</th>
+                                            <th>{{schedule.building}}</th>
+                                            <th>{{schedule.day}}</th>
+                                            <th>{{schedule.start}}</th>
+                                            <th>{{schedule.end}}</th>
+                                            <th>
+                                                <i 
+                                                    (click)="deleteClassSchedules(schedule._id)" 
+                                                    style="color: #cc483d; cursor:pointer" class="fa fa-close" aria-hidden="true"></i>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                        <!-- mode 1 -->
+                        <form 
+                            *ngIf="mode===1"
+                            [formGroup]="addScheduleForm">
+                            <label for="username">Subject</label>
+                            <input class="form-control" type="text" placeholder="Subject" formControlName="subject">
+                            <label for="username">Instructor</label>
+                            <input class="form-control" type="text" placeholder="Instructor" formControlName="instructor">
+                            <label for="username">Building</label>
+                            <input class="form-control" type="text" placeholder="Instructor" formControlName="building">
+                            <label for="username">Day</label>
+                            <select 
+                                class="form-control" 
+                                type="text" 
+                                placeholder="Day" 
+                                formControlName="day">
+                                <option 
+                                    *ngFor="let day of days; let i=index"
+                                    [selected]="i===0"
+                                    [value]="day">
+                                    {{day}}
+                                </option>
+                            </select>
+                            <label for="email">Start</label>
+                            <input class="form-control" type="time" placeholder="Start" formControlName="start">
+                            <label for="email">End</label>
+                            <input class="form-control" type="time" placeholder="End" formControlName="end">
+                        </form>
+                    </div>
+
+                    <div 
+                        *ngIf="mode===1"
+                        style="margin-top: 20px;">
+
+                        <button
+                            (click)="resetForm()"
+                            [disabled]="addScheduleForm.pristine" 
+                            class="btn btn-warning">Reset</button>
+                        <button
+                            (click)="fireBulkAddSchedule()"
+                            [disabled]="!addScheduleForm.valid" 
+                            class="btn btn-success">Add Schedule</button>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+</div>
