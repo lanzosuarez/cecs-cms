@@ -1,9 +1,6 @@
 export const colleges = [
-    'Engineering',
-    'Tourism Management',
-    'Communication',
-    'Law',
-    'Science',
+    'College of Engineering',
+    'College of Information Technology',
 ];
 
 
@@ -11,6 +8,6 @@ const prefix = 'Bachelor of Science in';
 
 export const courses = [
     `${prefix} Computer Engineering`,
-    `${prefix} Civil Engineering`,
+    `${prefix} Computer Science`,
     `${prefix} Information Technology`
 ];
