@@ -1,3 +1,5 @@
+import { InstructorSchedule } from './../../models/instructor_schedule';
+import { Instructor } from './../../models/instructor';
 import { colleges, courses } from './../school-data';
 import { LoadingService } from './../loader/loading.service';
 import { DataService } from './../services/data.service';
@@ -18,12 +20,12 @@ import {
 } from '@angular/forms';
 
 @Component({
-    selector: 'cecs-student',
-    templateUrl: 'student.component.html',
-    styleUrls: ['./student.component.css']
+    selector: 'cecs-instructor',
+    templateUrl: 'instructor.component.html',
+    styleUrls: ['./instructor.component.css']
 })
 
-export class StudentComponent implements OnInit {
+export class InstructorComponent implements OnInit {
 
     @ViewChild('backdrop') backdrop: ElementRef;
     @ViewChild('dialog') dialog: ElementRef;
@@ -33,12 +35,12 @@ export class StudentComponent implements OnInit {
 
     studentForm: FormGroup;
     addScheduleForm: FormGroup;
-    selectedStudent: Student;
-    selectedSchedule: Schedule;
+    selectedStudent: Instructor;
+    selectedSchedule: InstructorSchedule;
 
     addStudentFlag: boolean = false;
 
-    students: Student[] = [];
+    instructors: Instructor[] = [];
 
     collegesData = colleges;
     coursesData = courses;
@@ -63,11 +65,7 @@ export class StudentComponent implements OnInit {
 
     initializeForm() {
         this.studentForm = this.formBuilder.group({
-            sr_code: this.stringRequired(''),
-            year: this.stringRequired(''),
-            college: this.stringRequired(''),
-            course: this.stringRequired(''),
-            section: this.stringRequired(''),
+            emp_id: this.stringRequired(''),
             firstname: this.stringRequired(''),
             middlename: this.stringRequired(''),
             lastname: this.stringRequired(''),
@@ -80,7 +78,8 @@ export class StudentComponent implements OnInit {
     initAddScheduleForm() {
         this.addScheduleForm = this.formBuilder.group({
             subject: this.stringRequired(''),
-            instructor: this.stringRequired(''),
+            year: this.stringRequired(''),
+            section: this.stringRequired(''),
             building: this.stringRequired(''),
             day: this.stringRequired(''),
             start: this.stringRequired(''),
@@ -92,12 +91,12 @@ export class StudentComponent implements OnInit {
 
     getStudents() {
         this.loading.addCounter();
-        this.dataService.getStudents()
+        this.dataService.getInstructors()
             .subscribe(
             r => {
                 this.loading.minusCounter();
                 console.log(r);
-                this.students = r.data;
+                this.instructors = r.data;
             },
             err => {
                 this.loading.minusCounter();
@@ -112,7 +111,7 @@ export class StudentComponent implements OnInit {
 
         const student = this.studentForm.value;
 
-        this.dataService.createStudent(student)
+        this.dataService.createInstructor(student)
             .subscribe(
             r => {
                 this.loading.minusCounter();
@@ -123,35 +122,35 @@ export class StudentComponent implements OnInit {
             err => {
                 this.loading.minusCounter();
                 console.error(err);
-                alert("There's an error while fethcing the students information. Please try again");
+                alert("There's an error while fethcing the instructors information. Please try again");
             }
             );
     }
 
     fireDeleteStudent(_id, i) {
         this.loading.addCounter();
-        this.dataService.deleteStudent(_id)
+        this.dataService.deleteInstructor(_id)
             .subscribe(
             r => {
                 this.loading.minusCounter();
-                this.students.splice(i, 1);
+                this.instructors.splice(i, 1);
             },
             err => {
                 this.loading.minusCounter();
                 console.error(err);
-                alert("There's an error while deleting the student. Please try again");
+                alert("There's an error while deleting the instructor. Please try again");
             }
             );
     }
 
 
     editStudent() {
-        var flag = confirm("Are you sure you want to edit this item?")
+        var flag = confirm("Are you sure you want to save these changes?");
         if (flag) {
             console.log(this.studentForm.value);
             this.loading.addCounter();
             this.dataService
-                .updateStudent(this.studentForm.value, this.selectedStudent._id)
+                .updateInstructor(this.studentForm.value, this.selectedStudent._id)
                 .subscribe(
                 r => {
                     alert("Information successfully updated");
@@ -191,7 +190,7 @@ export class StudentComponent implements OnInit {
             schedule = this.addScheduleForm.value;
 
         this.loading.addCounter();
-        this.dataService.addStudentSchedule(_id, schedule)
+        this.dataService.addInstructorSchedule(_id, schedule)
             .subscribe(
             r => {
                 alert("Schedule successfully added");
@@ -212,7 +211,7 @@ export class StudentComponent implements OnInit {
         const { _id } = this.selectedStudent;
 
         this.loading.addCounter();
-        this.dataService.deleteStudentSchedule(_id, schedule_id)
+        this.dataService.deleteInstructorSchedule(_id, schedule_id)
             .subscribe(
             r => {
                 this.loading.minusCounter();
@@ -238,32 +237,37 @@ export class StudentComponent implements OnInit {
 
 
     updateStudentSchedule() {
-        const
-            { _id } = this.selectedStudent,
-            { _id: schedule_id } = this.selectedSchedule,
-            schedule = this.addScheduleForm.value;
+        const flag = confirm("Are you sure you want to save these changes?");
+        if (flag) {
+            const
+                { _id } = this.selectedStudent,
+                { _id: schedule_id } = this.selectedSchedule,
+                schedule = this.addScheduleForm.value;
 
-        console.log(schedule);
+            console.log(schedule);
 
-        this.loading.addCounter()
-        this.dataService.updateStudentSchedule(
-            _id,
-            schedule_id,
-            schedule
-        ).subscribe(
-            r => {
-                alert("Schedule successfully updated!");
-                this.loading.minusCounter();
-                this.selectedSchedule = Object.assign(this.selectedSchedule, schedule);
-                this.selectedSchedule = undefined;
-                this.initAddScheduleForm();
-            },
-            err => {
-                this.loading.minusCounter();
-                alert("An error happened while updating the schedule. Please try again")
-                console.error(err);
-            }
-            );
+            this.loading.addCounter()
+            this.dataService.updateInstructorSchedule(
+                _id,
+                schedule_id,
+                schedule
+            ).subscribe(
+                r => {
+                    alert("Schedule successfully updated!");
+                    this.loading.minusCounter();
+                    this.selectedSchedule = Object.assign(this.selectedSchedule, schedule);
+                    this.selectedSchedule = undefined;
+                    this.initAddScheduleForm();
+                },
+                err => {
+                    this.loading.minusCounter();
+                    alert("An error happened while updating the schedule. Please try again")
+                    console.error(err);
+                }
+                );
+        } else {
+            return false;
+        }
 
     }
 
@@ -281,8 +285,8 @@ export class StudentComponent implements OnInit {
     }
 
     openEdit(student, i: number) {
-
-        this.selectedStudent = this.students[i];
+        console.log(student);
+        this.selectedStudent = this.instructors[i];
         this.setStudentFormValue(student);
         this.style.hideElementFlex(this.backdrop, false);
     }

@@ -1,3 +1,4 @@
+import { Instructor } from './../../models/instructor';
 import { Schedule } from './../../models/schedule';
 import { url } from './../../global';
 import { ResourceService } from './resource.service';
@@ -22,6 +23,40 @@ export class DataService {
         });
 
         return this.http.get(`${url}/cecs/student`, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
+    getAdmin() {
+        const headers = new Headers({
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.get(`${url}/cecs/user`, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
+    editAdmin(data) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.patch(`${url}/cecs/user`, data, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+    createAdmin(data) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.post(`${url}/cecs/user`, data, { headers })
             .map(r => r.json())
             .catch(err => err.json());
     }
@@ -136,5 +171,87 @@ export class DataService {
             .map(r => r.json())
             .catch(err => err.json());
     }
+
+    //INSTRUCTORS
+
+
+    getInstructors() {
+        const headers = new Headers({
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.get(`${url}/cecs/instructor`, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+    createInstructor(instructor: Instructor) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.post(`${url}/cecs/instructor`, instructor, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+    deleteInstructor(_id) {
+        const headers = new Headers({
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.delete(`${url}/cecs/instructor/${_id}`, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
+    updateInstructor(student: Student, _id) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.patch(`${url}/cecs/instructor/${_id}`, student, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
+    addInstructorSchedule(instructor_id, schedule: Schedule) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.post(`${url}/cecs/instructor_schedule/${instructor_id}`, schedule, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+    deleteInstructorSchedule(instructor_id, schedule_id) {
+        const headers = new Headers({
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.delete(`${url}/cecs/instructor_schedule/${instructor_id}/${schedule_id}`, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
+    updateInstructorSchedule(instructor_id, schedule_id, schedule: Schedule) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.patch(`${url}/cecs/instructor_schedule/${instructor_id}/${schedule_id}`, schedule, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
 
 }

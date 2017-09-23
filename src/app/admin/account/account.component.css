@@ -24,9 +24,10 @@
     margin-right: 20px;
 }
 
-#edit{
+#edit, #add{
     float: right;
-    cursor: pointer;        
+    cursor: pointer;  
+    margin-right: 5px;      
 }
 
 #backdrop{
@@ -47,7 +48,7 @@
     transition: 1s;
     background-color: whitesmoke;
     padding: 20px;
-    height: 45%;
+    height: 55%;
     border-radius: 3px;
 }
 

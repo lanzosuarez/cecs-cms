@@ -1,3 +1,4 @@
+import { InstructorComponent } from './instructor/instructor.component';
 import { AboutComponent } from './about/about.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { DataService } from './services/data.service';
@@ -33,7 +34,8 @@ import { CommonModule } from '@angular/common';
         AccountComponent,
         LoaderComponent,
         ScheduleComponent,
-        AboutComponent
+        AboutComponent,
+        InstructorComponent
     ],
     providers: [
         ResourceService,

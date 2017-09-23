@@ -39,4 +39,16 @@ export class LoginService {
     }
 
 
+    forgotPassword(data) {
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'x-access-token': this.rs.getItem('token')
+        });
+
+        return this.http.patch(`${url}/cecs/forgot_password`, data, { headers })
+            .map(r => r.json())
+            .catch(err => err.json());
+    }
+
+
 }

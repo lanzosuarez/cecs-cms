@@ -1,3 +1,4 @@
+import { InstructorComponent } from './instructor/instructor.component';
 import { AboutComponent } from './about/about.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { StudentComponent } from './student/student.component';
@@ -24,6 +25,10 @@ const ADMIN_ROUTES: Routes = [
             {
                 path: 'students',
                 component: StudentComponent
+            },
+            {
+                path: 'instructors',
+                component: InstructorComponent
             },
             {
                 path: 'schedule',

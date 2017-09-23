@@ -4,18 +4,18 @@
         <button 
             (click)="setMode(1)"
             class="btn btn-success">
-            Bulk Add Schedules
+            Add Schedules
         </button>
         <button 
             (click)="setMode(2)"
             class="btn btn-danger">
-            Bulk Delete Schedules
+            Delete Schedules
         </button>
     </div>
     <div 
         id="forms">
-            <h3 *ngIf="mode===1">Bulk Add</h3>
-            <h3 *ngIf="mode===2">Bulk Delete</h3>
+            <h3 *ngIf="mode===1">Add</h3>
+            <h3 *ngIf="mode===2">Delete</h3>
             <div id="bulk-wrapper">
                 <div id="bulk-op-wrapper">
                     <div class="bulk-add">
@@ -146,8 +146,8 @@
                             <input class="form-control" type="text" placeholder="Subject" formControlName="subject">
                             <label for="username">Instructor</label>
                             <input class="form-control" type="text" placeholder="Instructor" formControlName="instructor">
-                            <label for="username">Building</label>
-                            <input class="form-control" type="text" placeholder="Instructor" formControlName="building">
+                            <label for="username">Room</label>
+                            <input class="form-control" type="text" placeholder="Building" formControlName="building">
                             <label for="username">Day</label>
                             <select 
                                 class="form-control" 

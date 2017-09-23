@@ -1,13 +1,19 @@
 <div id="wrapper">
     <div id="profile">
+      
         <div id="dp">
         </div>
         <div id="info">
             <i (click)="openEdit()" id="edit" class="fa fa-pencil-square-o" aria-hidden="true"></i>
             <h3>Admin</h3>
-            <p>Name: {{user?.name}}</p>
+            <p>Name: {{user?.firstname}} {{user?.lastname}}</p>
             <p>Username: {{user?.username}}</p>
             <p>Email: {{user?.email}}</p>
+            <button 
+                (click)="openAdd()"
+                class="btn btn-normal">
+                Add user
+            </button>
         </div>
     </div>
 </div>
@@ -15,7 +21,7 @@
 <div id="backdrop" (click)="hideEdit()" #backdrop>
     <div id="dialog" (click)="clickDialog($event)" #dialog>
         <form [formGroup]="adminForm" #formAdmin id="formAdmin">
-            <label for="name">Name</label>
+            <label for="name">First name</label>
                 <span>
                     <i  
                         (click)="clickEditLock()"
@@ -32,7 +38,13 @@
                 class="form-control" 
                 type="text"
                 placeholder="Name"
-                formControlName="name">
+                formControlName="firstname">
+            <label for="username">Last Name</label>
+            <input
+                class="form-control" 
+                type="text"
+                placeholder="Name"
+                formControlName="lastname">
             <label for="username">Username</label>
             <input
                 class="form-control"
@@ -47,10 +59,50 @@
                 formControlName="email">
             
             <button
-                [disabled]="!adminForm.valid"
+                (click)="editAdmin()"
+                [disabled]="adminForm.invalid===true || adminForm.disabled===true"
                 type="submit"
                 class="btn btn-primary"
             >Edit</button>
         </form>
     </div>
 </div>
+
+
+<div id="backdrop" (click)="hideAdd()" #backdropAdd>
+        <div id="dialog" (click)="clickDialog($event)" #dialogAdd>
+            <form [formGroup]="addUserForm" #addForm>
+                <label for="username">First name</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="First Name"
+                    formControlName="firstname">
+                <label for="username">Last name</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Last Name"
+                    formControlName="lastname">
+                <label for="email">Username</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Username"
+                    formControlName="username">
+                <label for="email">Email</label>
+                <input
+                    class="form-control" 
+                    type="text"
+                    placeholder="Email"
+                    formControlName="email">
+                
+                <button
+                    (click)="addUser()"
+                    [disabled]="!addUserForm.valid"
+                    type="submit"
+                    class="btn btn-primary"
+                >Add</button>
+            </form>
+        </div>
+    </div>
