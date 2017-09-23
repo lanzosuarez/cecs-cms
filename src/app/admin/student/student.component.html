@@ -8,10 +8,54 @@
         <i (click)="hideSearchForm()" style="cursor: pointer" class="fa fa-chevron-down" aria-hidden="true"></i>
         <div id="input-searches" #inputSearches>
             <input placeholder="SR Code" id="search-box" class="form-control" type="text">
-            <input placeholder="Year" id="search-box" class="form-control" type="text">
-            <input placeholder="Section" id="search-box" class="form-control" type="text">
-            <input placeholder="College" id="search-box" class="form-control" type="text">
-            <input placeholder="Course" id="search-box" class="form-control" type="text">
+            <select 
+                id="search-box"
+                class="form-control" 
+                type="text" 
+                placeholder="Course" >
+                <option disabled>Year</option>
+                <option 
+                    *ngFor="let year of [1,2,3,4,5]; let i=index"
+                    [value]="year">
+                    {{year}}
+                </option>
+            </select>
+            <select 
+                id="search-box"
+                class="form-control" 
+                type="text" 
+                placeholder="Course" >
+                <option disabled>Section</option>
+                <option 
+                    *ngFor="let section of [1,2,3,4,5,6]; let i=index"
+                    [value]="section">
+                    {{section}}
+                </option>
+            </select>
+            <select 
+                id="search-box"
+                class="form-control" 
+                type="text" 
+                placeholder="Course" >
+                <option disabled>College</option>
+                <option 
+                    *ngFor="let college of collegesData; let i=index"
+                    [value]="college">
+                    {{college}}
+                </option>
+            </select>
+            <select 
+                id="search-box"
+                class="form-control" 
+                type="text" 
+                placeholder="Course" >
+                <option disabled>Course</option>
+                <option 
+                    *ngFor="let course of coursesData; let i=index"
+                    [value]="course">
+                    {{course}}
+                </option>
+            </select>
         </div>
 
         <div class="table-responsive">
