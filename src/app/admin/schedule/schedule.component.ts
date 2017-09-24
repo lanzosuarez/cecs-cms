@@ -38,6 +38,7 @@ export class ScheduleComponent implements OnInit {
     colleges = [];
     courses = [];
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    instructors = [];
 
 
     constructor(
@@ -49,6 +50,7 @@ export class ScheduleComponent implements OnInit {
     ngOnInit() {
         this.getClassesAndSections();
         this.initAddScheduleForm();
+        this.getInstructors();
     }
 
 
@@ -82,6 +84,22 @@ export class ScheduleComponent implements OnInit {
                 console.error(err);
             }
             );
+    }
+
+    getInstructors() {
+        this.loading.addCounter();
+        this.dataService.getInstructors()
+            .subscribe(
+            r => {
+                console.log(r.data);
+                this.loading.minusCounter();
+                this.instructors = r.data;
+            },
+            err => {
+                this.loading.minusCounter();
+                alert("Error while fetching instructors");
+            }
+            )
     }
 
 

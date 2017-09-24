@@ -7,8 +7,14 @@
         <label style="margin-right: 5px;">Search</label>
         <i (click)="hideSearchForm()" style="cursor: pointer" class="fa fa-chevron-down" aria-hidden="true"></i>
         <div id="input-searches" #inputSearches>
-            <input placeholder="SR Code" id="search-box" class="form-control" type="text">
-            <select 
+            <input 
+                [(ngModel)]="studentFilter.sr_code"
+                placeholder="SR Code" 
+                id="search-box" 
+                class="form-control" 
+                type="text">
+            <select
+                [(ngModel)]="studentFilter.year" 
                 id="search-box"
                 class="form-control" 
                 type="text" 
@@ -20,7 +26,8 @@
                     {{year}}
                 </option>
             </select>
-            <select 
+            <select
+                [(ngModel)]="studentFilter.section"  
                 id="search-box"
                 class="form-control" 
                 type="text" 
@@ -33,18 +40,7 @@
                 </option>
             </select>
             <select 
-                id="search-box"
-                class="form-control" 
-                type="text" 
-                placeholder="Course" >
-                <option disabled>College</option>
-                <option 
-                    *ngFor="let college of collegesData; let i=index"
-                    [value]="college">
-                    {{college}}
-                </option>
-            </select>
-            <select 
+                [(ngModel)]="studentFilter.course" 
                 id="search-box"
                 class="form-control" 
                 type="text" 
@@ -56,6 +52,16 @@
                     {{course}}
                 </option>
             </select>
+            <button 
+                (click)="clearFilters()"
+                style="
+                    margin: 0 !important;
+                    margin-left: 15px !important;
+                    width: 125px;
+                    height: 28px;
+                ">
+                Clear Searches
+            </button>
         </div>
 
         <div class="table-responsive">
@@ -76,7 +82,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let student of students; let i=index">
+                    <tr *ngFor="let student of students | filterBy: studentFilter; let i=index">
                         <td>{{student.sr_code}}</td>
                         <td>{{student.section}}</td>
                         <td>{{student.year}}</td>

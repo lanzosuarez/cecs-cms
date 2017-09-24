@@ -13,9 +13,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminRouting } from './admin.routing';
 import { AdminComponent } from './admin.component';
 import { HttpModule } from '@angular/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+//3rd party
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
 
 @NgModule({
@@ -23,7 +26,9 @@ import { CommonModule } from '@angular/common';
         CommonModule,
         ReactiveFormsModule,
         HttpModule,
-        AdminRouting
+        AdminRouting,
+        Ng2FilterPipeModule,
+        FormsModule
     ],
     exports: [],
     declarations: [
@@ -35,7 +40,7 @@ import { CommonModule } from '@angular/common';
         LoaderComponent,
         ScheduleComponent,
         AboutComponent,
-        InstructorComponent
+        InstructorComponent,
     ],
     providers: [
         ResourceService,

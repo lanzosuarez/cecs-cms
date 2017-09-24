@@ -46,6 +46,13 @@ export class InstructorComponent implements OnInit {
     coursesData = courses;
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+    instructorFilter = {
+        emp_id: '',
+        firstname: '',
+        middlename: '',
+        lastname: ''
+    };
+
     constructor(
         private style: StyleHelperService,
         private formBuilder: FormBuilder,
@@ -374,6 +381,16 @@ export class InstructorComponent implements OnInit {
         } else {
             this.inputSearches.nativeElement.style.display = 'none'
         }
+    }
+
+
+    clearFilters() {
+        this.instructorFilter = {
+            emp_id: '',
+            firstname: '',
+            middlename: '',
+            lastname: ''
+        };
     }
 
 

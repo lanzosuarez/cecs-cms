@@ -145,7 +145,21 @@
                             <label for="username">Subject</label>
                             <input class="form-control" type="text" placeholder="Subject" formControlName="subject">
                             <label for="username">Instructor</label>
-                            <input class="form-control" type="text" placeholder="Instructor" formControlName="instructor">
+                            <select 
+                                class="form-control" 
+                                type="text" 
+                                placeholder="Day" 
+                                formControlName="instructor">
+                                <option
+                                    disabled
+                                    >
+                                Select Instructor
+                                <option 
+                                    *ngFor="let instructor of instructors; let i=index"
+                                    [value]="instructor.firstname+ +instructor.middlename+ +instructor.lastname">
+                                    {{instructor.firstname+' '+instructor.middlename+' '+instructor.lastname}}
+                                </option>
+                            </select>
                             <label for="username">Room</label>
                             <input class="form-control" type="text" placeholder="Building" formControlName="building">
                             <label for="username">Day</label>

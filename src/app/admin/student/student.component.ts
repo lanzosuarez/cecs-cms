@@ -44,6 +44,13 @@ export class StudentComponent implements OnInit {
     coursesData = courses;
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+    studentFilter = {
+        sr_code: '',
+        year: '',
+        section: '',
+        course: ''
+    };
+
     constructor(
         private style: StyleHelperService,
         private formBuilder: FormBuilder,
@@ -369,6 +376,15 @@ export class StudentComponent implements OnInit {
             this.style.hideElementFlex(this.inputSearches, false);
         } else {
             this.inputSearches.nativeElement.style.display = 'none'
+        }
+    }
+
+    clearFilters() {
+        this.studentFilter = {
+            sr_code: '',
+            year: '',
+            section: '',
+            course: ''
         }
     }
 

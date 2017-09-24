@@ -7,11 +7,40 @@
         <label style="margin-right: 5px;">Search</label>
         <i (click)="hideSearchForm()" style="cursor: pointer" class="fa fa-chevron-down" aria-hidden="true"></i>
         <div id="input-searches" #inputSearches>
-            <input placeholder="Employee ID" id="search-box" class="form-control" type="text">
-            <input placeholder="Year" id="search-box" class="form-control" type="text">
-            <input placeholder="Section" id="search-box" class="form-control" type="text">
-            <input placeholder="College" id="search-box" class="form-control" type="text">
-            <input placeholder="Course" id="search-box" class="form-control" type="text">
+            <input 
+                [(ngModel)]="instructorFilter.emp_id"
+                placeholder="ID" 
+                id="search-box" 
+                class="form-control" 
+                type="text">
+            <input
+                [(ngModel)]="instructorFilter.firstname" 
+                placeholder="Firstname" 
+                id="search-box" 
+                class="form-control" 
+                type="text">
+            <input 
+                [(ngModel)]="instructorFilter.middlename"
+                placeholder="Middlename" 
+                id="search-box" 
+                class="form-control" 
+                type="text">
+            <input 
+                [(ngModel)]="instructorFilter.lastname"
+                placeholder="Lastname" 
+                id="search-box" 
+                class="form-control" 
+                type="text">
+            <button 
+                (click)="clearFilters()"
+                style="
+                    margin: 0 !important;
+                    margin-left: 15px !important;
+                    width: 125px;
+                    height: 28px;
+                ">
+                Clear Searches
+            </button>
         </div>
 
         <div class="table-responsive">
@@ -28,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let instructor of instructors; let i=index">
+                    <tr *ngFor="let instructor of instructors | filterBy: instructorFilter; let i=index">
                         <td>{{instructor.emp_id}}</td>
                         <td>{{instructor.email}}</td>
                         <td>{{instructor.firstname}}</td>
