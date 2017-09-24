@@ -1,3 +1,5 @@
+import { LoadingService } from './../loader/loading.service';
+import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,15 +10,46 @@ import { Component, OnInit } from '@angular/core';
 
 export class DashboardComponent implements OnInit {
 
-    studentsCount: number = 110;
-    instructorsCount: number = 110;
-    buildingsCount: number = 110;
+    studentsCount: number = 0;
+    instructorsCount: number = 0;
 
-    constructor() { }
+    constructor(
+        private data: DataService,
+        private loading: LoadingService
+    ) { }
 
     ngOnInit() {
 
+        this.getStudents();
+        this.getInstructors();
+    }
 
+    getStudents() {
+        this.loading.addCounter();
+        this.data.getStudents()
+            .subscribe(
+            r => {
+                this.loading.minusCounter();
+                this.studentsCount = r.data.length;
+            },
+            err => {
+                this.loading.minusCounter();
+            }
+            );
+    }
+
+    getInstructors() {
+        this.loading.addCounter();
+        this.data.getInstructors()
+            .subscribe(
+            r => {
+                this.loading.minusCounter();
+                this.instructorsCount = r.data.length;
+            },
+            err => {
+                this.loading.minusCounter();
+            }
+            );
     }
 
 
