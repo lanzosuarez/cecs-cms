@@ -39,7 +39,7 @@
                     width: 125px;
                     height: 28px;
                 ">
-                Clear Searches
+                Clear Filter
             </button>
         </div>
 
@@ -274,7 +274,7 @@
                 <button 
                     [disabled]="!addScheduleForm.valid" 
                     (click)="updateStudentSchedule()"
-                    *ngIf="selectedSchedule" type="submit" class="btn btn-info">Edit Schedule</button>
+                    *ngIf="selectedSchedule" type="submit" class="btn btn-info">Save Schedule</button>
                 <button 
                     *ngIf="selectedSchedule" 
                     (click)="deselectSchedule()" 
