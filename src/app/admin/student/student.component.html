@@ -138,10 +138,9 @@
                     placeholder="College" 
                     formControlName="college">
                     <option 
-                        *ngFor="let college of collegesData; let i=index"
-                        [selected]="i===0"
-                        [value]="college">
-                        {{college}}
+                        selected
+                        value="College of Engineering and Computing Sciences">
+                        College of Engineering and Computing Sciences
                     </option>
                 </select>
 

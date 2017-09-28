@@ -118,6 +118,7 @@ export class StudentComponent implements OnInit {
         this.loading.addCounter();
 
         const student = this.studentForm.value;
+        console.log(student);
 
         this.dataService.createStudent(student)
             .subscribe(
