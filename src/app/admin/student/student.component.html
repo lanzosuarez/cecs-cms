@@ -257,8 +257,8 @@
                                 <th>{{schedule.instructor}}</th>
                                 <th>{{schedule.building}}</th>
                                 <th>{{schedule.day}}</th>
-                                <th>{{schedule.start}}</th>
-                                <th>{{schedule.end}}</th>
+                                <th>{{formatSchedTime(schedule.start)}}</th>
+                                <th>{{formatSchedTime(schedule.end)}}</th>
                                 <!-- <th>
                                     <i 
                                         (click)="deleteStudentSchedule($event, schedule._id, i)" 

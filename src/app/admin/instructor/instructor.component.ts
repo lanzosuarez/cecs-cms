@@ -19,6 +19,8 @@ import {
     FormGroup
 } from '@angular/forms';
 
+import * as moment from 'moment';
+
 @Component({
     selector: 'cecs-instructor',
     templateUrl: 'instructor.component.html',
@@ -391,6 +393,18 @@ export class InstructorComponent implements OnInit {
             middlename: '',
             lastname: ''
         };
+    }
+
+    formatSchedTime(time) {
+        const
+            hm = time.split(':'),
+            [h, m] = hm,
+
+            date = new Date();
+
+        date.setHours(Number(h), Number(m));
+
+        return moment(date).format('LT');
     }
 
 
